@@ -1,3 +1,13 @@
+/* Copyright (C) 1883 Thomas Edison - All Rights Reserved
+ * You may use, distribute and modify this code under the
+ * terms of the XYZ license, which unfortunately won't be
+ * written for another century.
+ *
+ * You should have received a copy of the XYZ license with
+ * this file. If not, please write to: , or visit :
+ */
+
+
 const fs = require('fs')
 const xml2js = require('xml2js');
  
@@ -29,11 +39,11 @@ folders.forEach(folder => {
 				json[key] = unordered[key];
 			});	
 	
-			if (!fs.existsSync(directory + 'JSON/')){
-				fs.mkdirSync(directory + 'JSON/');
-			}
+			if (!fs.existsSync(directory + 'JSON/')) fs.mkdirSync(directory + 'JSON/')
+			if (!fs.existsSync(directory + 'JSON_minified/')) fs.mkdirSync(directory + 'JSON_minified/')
+
 			fs.writeFileSync(directory + 'JSON/' + file.split('.xml').join('.json'), JSON.stringify(json, null, 4));
-			fs.writeFileSync(directory + 'JSON/' + file.split('.xml').join('_min.json'), JSON.stringify(json));
+			fs.writeFileSync(directory + 'JSON_minified/' + file.split('.xml').join('_min.json'), JSON.stringify(json));
 
 			if(file !== 'text_ui_deceitmenu.xml') return;
 			
@@ -57,7 +67,7 @@ folders.forEach(folder => {
 
 
 			fs.writeFileSync(directory + 'JSON/' + 'Cosmetics.json', JSON.stringify(Cosmetics, null, 4));
-			fs.writeFileSync(directory + 'JSON/' + 'Cosmetics_min.json', JSON.stringify(Cosmetics));
+			fs.writeFileSync(directory + 'JSON_minified/' + 'Cosmetics_min.json', JSON.stringify(Cosmetics));
 
 
 		})
