@@ -4,9 +4,7 @@ This is my JavaScript script to generate some things useful things from Deceit X
 
 ## Requirement
 
-To run this you'll need [node](https://nodejs.org/) installed with [npm](http://npmjs.com/), and I'v also used some npm packages, such as
-[xml2js](https://www.npmjs.com/package/xml2js)
-[fs](https://www.npmjs.com/package/fs)
+To run this you'll need [node](https://nodejs.org/) installed with [npm](http://npmjs.com/), and I'v also used some npm packages, such as [xml2js](https://www.npmjs.com/package/xml2js) and [fs](https://www.npmjs.com/package/fs)
 
 ## Usage
 
