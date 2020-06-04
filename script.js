@@ -61,15 +61,8 @@ folders.forEach(folder => {
 				})				
 			});
 
-
-
-
-
-
 			fs.writeFileSync(directory + 'JSON/' + 'Cosmetics.json', JSON.stringify(Cosmetics, null, 4));
 			fs.writeFileSync(directory + 'JSON_minified/' + 'Cosmetics_min.json', JSON.stringify(Cosmetics));
-
-
 		})
 	})
 })
