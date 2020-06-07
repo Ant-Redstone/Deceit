@@ -37,9 +37,11 @@ folders.forEach(folder => {
 
 			if(file !== 'text_ui_deceitmenu.xml') return;
 			
-			const Cosmetics = {"name":[]}
-			const keys = ['Hair', 'Accessories', 'Clothes', 'Wrist', 'Pistol', 'Knife', 'VP', 'DP']
-
+			const extractedData = {"cosmetics":[], "perks":{"name":[], "description":[], "englishName":[], "imgURL":[]}}
+			let keys = []
+			
+			// Extract Translated Cosmetics
+			keys = ['Hair', 'Accessories', 'Clothes', 'Wrist', 'Pistol', 'Knife', 'VP', 'DP']
 			keys.forEach(key => {
 				const prefix = `ui_${key}`
 				Object.keys(json).forEach(e => {
@@ -47,12 +49,25 @@ folders.forEach(folder => {
 					if(isNaN(e.split(prefix)[1])) return;
 					const id = e.split(prefix)[1]
 					const name = json[e]
-					Cosmetics.name[id] = name;
+					extractedData.cosmetics[id] = name;
 				})				
 			});
+			
+			// Extract Perks
+			keys = ['Hair', 'Accessories', 'Clothes', 'Wrist', 'Pistol', 'Knife', 'VP', 'DP']
+			keys.forEach(key => {
+				const prefix = `UI_Perk${key}_`;
+				Object.keys(json).forEach(e => {
+					if(!e.startsWith(prefix)) return;
+					if(isNaN(e.split(prefix)[1])) return;
+					const id = e.split(prefix)[1]
+					const name = json[e]
+					extractedData.perks[id] = name;
+				});
+			})
 
-			fs.writeFileSync(directory + 'JSON/' + 'Cosmetics.json', JSON.stringify(Cosmetics, null, 4));
-			fs.writeFileSync(directory + 'JSON_minified/' + 'Cosmetics_min.json', JSON.stringify(Cosmetics));
+			fs.writeFileSync(directory + 'JSON/' + 'extractedData.json', JSON.stringify(extractedData, null, 4));
+			fs.writeFileSync(directory + 'JSON_minified/' + 'extractedData_min.json', JSON.stringify(extractedData));
 		})
 	})
 })
