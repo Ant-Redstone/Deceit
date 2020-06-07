@@ -37,7 +37,7 @@ folders.forEach(folder => {
 
 			if(file !== 'text_ui_deceitmenu.xml') return;
 			
-			const extractedData = {"cosmetics":[], "perks":{"name":[], "description":[], "englishName":[], "imgURL":[]}}
+			const extractedData = {"cosmetics":[], "perks":{"name":[], "description":[]}}
 			let keys = []
 			
 			// Extract Translated Cosmetics
@@ -54,15 +54,15 @@ folders.forEach(folder => {
 			});
 			
 			// Extract Perks
-			keys = ['Hair', 'Accessories', 'Clothes', 'Wrist', 'Pistol', 'Knife', 'VP', 'DP']
+			keys = ['Name', 'Description']
 			keys.forEach(key => {
 				const prefix = `UI_Perk${key}_`;
 				Object.keys(json).forEach(e => {
 					if(!e.startsWith(prefix)) return;
 					if(isNaN(e.split(prefix)[1])) return;
 					const id = e.split(prefix)[1]
-					const name = json[e]
-					extractedData.perks[id] = name;
+					const value = json[e]
+					extractedData.perks[key.toLowerCase()][id] = value;
 				});
 			})
 
