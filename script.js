@@ -90,6 +90,7 @@ const extractedData = require(`${path}/english_xml/JSON_minified/extractedData_m
 const json = { "imgURL":[] }
 
 async function PerksURLGrabber() {
+	// Grab Image URLs
 	for (let i = 0; i < extractedData.perks.name.length; i++) {
 		let name = extractedData.perks.name[i];
 		if(name !== null) {
