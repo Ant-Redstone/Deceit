@@ -36,4 +36,38 @@ async function GetPerkTrees(){
 	return Data;
 }
 
-GetPerkTrees()
+async function GetPerkTree(i){
+		Data = [];
+		const res = await fetch(`https://www.luxordoesntframe.com/perk-tree-${i}.html`)
+		const html = await res.text()
+
+		const $ = cheerio.load(html);
+		$('div#perk_tree > div').each(function(){
+			let row = []
+			$(this).children().each(function(e){
+				row.push($(this).find('p').text())
+			})
+			Data.push(row.map(e => getID(e)));
+		})
+	return Data;
+}
+
+async function GetCurrentPerkTree(){
+	const cpt = await CurrentPerkTree()
+}
+async function CurrentPerkTree(){
+	const res = await fetch('https://www.luxordoesntframe.com/')
+	const html = await res.text()
+	const $ = cheerio.load(html);
+	const title = $('head > title')
+	return title.text().split('#').slice(1).join('')
+}
+
+async function main(){
+	// const perk_trees = await GetPerkTrees()
+	const current_perk_tree = await GetCurrentPerkTree();
+	console.log(current_perk_tree)
+	console.log(await GetPerkTree(3))
+
+}
+main()
